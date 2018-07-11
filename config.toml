@@ -1,0 +1,18 @@
+# debug or release
+Env = "debug"
+Port = "8000"
+PublicKeyPath = "./public-key.pem"
+[database]
+    # MySQL接続設定
+    User = "root"
+    Password = ""
+    Database = "encuentro"
+    Host  = "localhost"
+    Port = "3306"
+    Debug = true
+[mail]
+    Sender = "ジュクスル（開発用アカウント）"
+    UserName = "develop@juksl.com"
+    Password = "4vCH0yR&"
+    Host = "smtp20.gmoserver.jp"
+    SMTP = "smtp20.gmoserver.jp:587"

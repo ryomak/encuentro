@@ -13,11 +13,11 @@ type User struct {
 	Age      uint `json:"age"`
 	Gender   uint   `json:"gender"`
 	Income   uint   `json:"income"` //年収
-	Job      Job `json:"job"`
+	Jobs     []Job `json:"job" gorm:"many2many:user_jobs;"`
 	LineID   string `json:"line_id"`
 	Mail     string `json:"mail"`
 	Phone    string `json:"phone"`
-	Tag      []Tag  `json:"tag"`
+	Tags      []Tag  `json:"tag" gorm:"many2many:user_tags;"`
 }
 
 func (User) Migrate(db *gorm.DB)error{
@@ -26,11 +26,11 @@ func (User) Migrate(db *gorm.DB)error{
 			Name:"初期男",
 			Age:25,Gender:util.MALE,
 			Income:600,
-			Job:Job{Name:"エンジニア"},
+			Jobs:[]Job{{Name:"エンジニア"}},
 			LineID:"fds",
 			Mail:"testa@a.com",
 			Phone:"090",
-			Tag:[]Tag{{Name:"年収1000万以上"}},
+			Tags:[]Tag{{Name:"年収1000万以上"}},
 		},
 	}
 	for _,v := range initData{

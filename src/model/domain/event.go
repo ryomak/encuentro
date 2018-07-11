@@ -22,7 +22,9 @@ type Tags struct {
 
 func (Event) Migrate(db *gorm.DB)error{
 	initData := []Event{
-		{Name:"エンジニア合コン",MenNumber:3,WomenNumber:3,Restaurant:Restaurant{
+		{
+			Name:"エンジニア合コン",MenNumber:3,WomenNumber:3,
+			Restaurant:Restaurant{
 			Name:"6年４組",
 			Address:"大阪駅第６ビル",
 			Price:3000,

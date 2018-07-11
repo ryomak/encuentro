@@ -1,8 +1,11 @@
+reset-db:
+	sh ./src/script/reset_db.sh 
+
 migrate:
 	go run src/script/migrate.go
 
 run:
-	./bin/main -config ./config.toml
+	go run src/main.go -config ./config.toml
 
 build:
 	go build -o ./bin/main ./src/main.go 

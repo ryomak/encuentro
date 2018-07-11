@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/ryomak/brand_web/src/router"
-	"github.com/ryomak/brand_web/src/util"
+	"github.com/ryomak/encuentro/src/router"
+	"github.com/ryomak/encuentro/src/util"
 	"flag"
 	"github.com/gin-gonic/gin"
 )

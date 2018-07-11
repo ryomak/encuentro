@@ -7,9 +7,10 @@ import (
 	"net/http"
 )
 
+
 func NewHandler(model interface{},handler *ApiHandler)*ApiHandler{
 	if handler.GetHandler == nil {
-		handler.GetAllHandler =  getHandler(model,GetOption{})
+		handler.GetHandler =  getHandler(model,GetOption{})
 	}
 	if handler.GetAllHandler == nil{
 		handler.GetAllHandler = getAllHandler(model,GetOption{})
@@ -36,8 +37,8 @@ func WrapHandler(g *gin.RouterGroup,h *ApiHandler,m ...gin.HandlerFunc){
 }
 
 func getHandler(m interface{},op GetOption)gin.HandlerFunc{
-	p := NewInstance(m)
 	return func(c *gin.Context) {
+		p := NewInstance(m)
 		db := util.GetDB(c)
 		if err := callExist(c,op.BeforeGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
@@ -57,7 +58,7 @@ func getHandler(m interface{},op GetOption)gin.HandlerFunc{
 }
 
 func getAllHandler(m interface{},op GetOption)gin.HandlerFunc{
-	p := NewInstance(m)
+	p := NewSlice(m)
 	return func(c *gin.Context) {
 		db := util.GetDB(c)
 		if err := callExist(c,op.BeforeGet);err != nil{
@@ -102,9 +103,9 @@ func createHandler(m interface{},op CreateOption)gin.HandlerFunc{
 }
 
 func updateHandler(m interface{},op UpdateOption)gin.HandlerFunc{
-	p := NewInstance(m)
-	updateP := NewInstance(m)
 	return func(c *gin.Context) {
+		p := NewInstance(m)
+		updateP := NewInstance(m)
 		db := util.GetDB(c)
 		if err := c.Bind(updateP);err != nil{
 			c.JSON(http.StatusBadRequest,CreateErrorResponse(err))
@@ -128,8 +129,8 @@ func updateHandler(m interface{},op UpdateOption)gin.HandlerFunc{
 }
 
 func deleteHandler(m interface{},op DeleteOption)gin.HandlerFunc{
-	p := NewInstance(m)
 	return func(c *gin.Context) {
+		p := NewInstance(m)
 		db := util.GetDB(c)
 		if err := db.First(p,"id = ?",c.Param("id")).Error;err!= nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
@@ -158,4 +159,16 @@ func NewInstance(i interface{}) interface{} {
 		t = t.Elem()
 	}
 	return reflect.New(t).Interface()
+}
+
+// util.NewInstance returns reference of new slice of i
+func NewSlice(i interface{}) interface{} {
+	t := reflect.TypeOf(i)
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+	slice := reflect.MakeSlice(reflect.SliceOf(t), 0, 0)
+	ptr := reflect.New(slice.Type())
+	ptr.Elem().Set(slice)
+	return ptr.Interface()
 }

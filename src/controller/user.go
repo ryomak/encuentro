@@ -8,18 +8,9 @@ import (
 )
 
 
+
 var UserEndpoint = util.NewHandler(domain.User{},&util.ApiHandler{
-	GetHandler: func(c *gin.Context) {
-		db := util.GetDB(c)
-		u := domain.User{}
-		if err := db.Preload("Jobs").Preload("Tags").First(&u,"id = ?",c.Param("id")).Error;
-		err != nil{
-			util.GetErrorResponse(err)
-			return
-		}
-		c.JSON(http.StatusOK,u)
-		return
-	},
+	GetHandler: util.GetHandler(domain.User{},util.GetOption{}),
 	GetAllHandler:func(c *gin.Context) {
 		db := util.GetDB(c)
 		u := []domain.User{}

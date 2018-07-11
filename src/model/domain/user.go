@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"gopkg.in/go-playground/validator.v9"
 	"github.com/ryomak/encuentro/src/util"
+	"github.com/gin-gonic/gin"
 )
 
 
@@ -19,6 +20,48 @@ type User struct {
 	Phone    string `json:"phone"`
 	Tags      []Tag  `json:"tag" gorm:"many2many:user_tags;"`
 }
+
+
+//API用
+func (user User)Get(c *gin.Context)(interface{},error){
+	db := util.GetDB(c)
+	if err := db.Preload("Jobs").Preload("Tags").First(&user,"id = ?",c.Param("id")).Error;err != nil{
+		return nil,err
+	}
+	return &user,nil
+}
+
+func (user User)GetAll(c *gin.Context)(interface{},error){
+	u := []*User{}
+	db := util.GetDB(c)
+	if err := db.Preload("Jobs").Preload("Tags").Find(&u).Error;err != nil{
+		return nil,err
+	}
+	return u,nil
+}
+
+func (user User)Delete(c *gin.Context)error{
+	db := util.GetDB(c)
+	if err := db.Preload("Jobs").Preload("Tags").First(&user,).Error;err != nil{
+		return err
+	}
+	return nil
+}
+func (user User)Create(c *gin.Context)error{
+	db := util.GetDB(c)
+	if err := db.Preload("Jobs").Preload("Tags").First(&user).Error;err != nil{
+		return err
+	}
+	return nil
+}
+func (user User)Upadate(c *gin.Context)error{
+	db := util.GetDB(c)
+	if err := db.Preload("Jobs").Preload("Tags").First(&user).Error;err != nil{
+		return err
+	}
+	return nil
+}
+
 
 func (User) Migrate(db *gorm.DB)error{
 	initData := []User{

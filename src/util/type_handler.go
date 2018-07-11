@@ -10,9 +10,12 @@ type ApiHandler struct {
 	DeleteHandler gin.HandlerFunc
 }
 
-type CreateHandler struct {
-	Handler gin.HandlerFunc
-	Option CreateOption
+type ApiOption struct {
+	GetOption    GetOption
+	GetAllOption  GetOption
+	CreateOption CreateOption
+	UpdateOption UpdateOption
+	DeleteOption DeleteOption
 }
 
 type CreateOption struct {
@@ -20,34 +23,28 @@ type CreateOption struct {
 	AfterCreate  func (c *gin.Context)error
 }
 
-type GetHandler struct {
-	Handler gin.HandlerFunc
-	Option GetOption
-}
-
 type GetOption struct {
 	BeforeGet func (c *gin.Context)error
 	AfterGet  func (c *gin.Context)error
 }
 
-type UpdateHandler struct {
-	Handler gin.HandlerFunc
-	Option UpdateOption
-}
 
 type UpdateOption struct {
 	BeforeUpdate func (c *gin.Context)error
 	AfterUpdate func (c *gin.Context)error
 }
 
-type DeleteHandler struct {
-	Handler gin.HandlerFunc
-	Option DeleteOption
-}
-
 type DeleteOption struct {
 	BeforeDelete func (c *gin.Context)error
 	AfterDelete func (c *gin.Context)error
+}
+
+type Method interface {
+	Get(*gin.Context)(interface{},error)
+	GetAll(*gin.Context)(interface{},error)
+	Create(*gin.Context)error
+	Update(*gin.Context)error
+	Delete(*gin.Context)error
 }
 
 func callExist(c *gin.Context,f func(g *gin.Context)error)error{

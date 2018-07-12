@@ -40,15 +40,18 @@ func GetHandler(m Method,op GetOption)gin.HandlerFunc{
 	return func(c *gin.Context){
 		if err := callExist(c,op.BeforeGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		res ,err := m.Get(c)
 		if err != nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		c.JSON(http.StatusOK,res)
@@ -60,15 +63,18 @@ func GetAllHandler(m Method,op GetOption)gin.HandlerFunc{
 	return func(c *gin.Context){
 		if err := callExist(c,op.BeforeGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		res, err := m.GetAll(c)
 		if err != nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		c.JSON(http.StatusOK,res)
@@ -81,17 +87,21 @@ func CreateHandler(m Method,op CreateOption)gin.HandlerFunc{
 	return func(c *gin.Context){
 		if err := callExist(c,op.BeforeCreate);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
-		if err := m.Create(c);err != nil{
+		res ,err := m.Create(c)
+		if err != nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterCreate);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
-		c.JSON(http.StatusOK,m)
+		c.JSON(http.StatusOK,res)
 		return
 	}
 }
@@ -100,17 +110,21 @@ func UpdateHandler(m Method,op UpdateOption)gin.HandlerFunc{
 	return func(c *gin.Context){
 		if err := callExist(c,op.BeforeUpdate);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
-		if err := m.Update(c);err != nil{
+		res , err := m.Update(c)
+		if err != nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterUpdate);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
-		c.JSON(http.StatusOK,m)
+		c.JSON(http.StatusOK,res)
 		return
 	}
 }
@@ -118,20 +132,23 @@ func UpdateHandler(m Method,op UpdateOption)gin.HandlerFunc{
 
 func DeleteHandler(m Method,op DeleteOption)gin.HandlerFunc{
 	return func(c *gin.Context){
-		p := NewInstance(m)
 		if err := callExist(c,op.BeforeDelete);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
-		if err := m.Delete(c);err != nil{
+		res, err := m.Delete(c)
+		if err != nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterDelete);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
-		c.JSON(http.StatusOK,p)
+		c.JSON(http.StatusOK,res)
 		return
 	}
 }
@@ -142,14 +159,17 @@ func getNormalHandler(m interface{},op GetOption)gin.HandlerFunc{
 		db := util.GetDB(c)
 		if err := callExist(c,op.BeforeGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := db.First(p,"id = ?",c.Param("id")).Error;err != nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		c.JSON(http.StatusOK,p)
@@ -163,14 +183,17 @@ func getAllNormalHandler(m interface{},op GetOption)gin.HandlerFunc{
 		db := util.GetDB(c)
 		if err := callExist(c,op.BeforeGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := db.Find(p).Error;err != nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterGet);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		c.JSON(http.StatusOK,p)
@@ -184,17 +207,22 @@ func createNormalHandler(m interface{},op CreateOption)gin.HandlerFunc{
 		db := util.GetDB(c)
 		if err := c.Bind(p);err != nil{
 			c.JSON(http.StatusBadRequest,CreateErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.BeforeCreate);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
+			return
 		}
 		if err := db.Create(p).Error;err != nil{
 			c.JSON(http.StatusBadRequest,DBCreateErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterCreate);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		c.JSON(http.StatusOK,p)
@@ -209,18 +237,22 @@ func updateNormalHandler(m interface{},op UpdateOption)gin.HandlerFunc{
 		db := util.GetDB(c)
 		if err := c.Bind(updateP);err != nil{
 			c.JSON(http.StatusBadRequest,CreateErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.BeforeUpdate);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := db.Model(&p).Update(updateP).Error;err != nil{
 			c.JSON(http.StatusBadRequest,DBCreateErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterUpdate);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		c.JSON(http.StatusOK,p)
@@ -234,18 +266,22 @@ func deleteNormalHandler(m interface{},op DeleteOption)gin.HandlerFunc{
 		db := util.GetDB(c)
 		if err := db.First(p,"id = ?",c.Param("id")).Error;err!= nil{
 			c.JSON(http.StatusBadRequest,GetErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.BeforeDelete);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := db.Delete(p).Error;err != nil{
 			c.JSON(http.StatusBadRequest,DeleterrorResponse(err))
+			panic(err)
 			return
 		}
 		if err := callExist(c,op.AfterDelete);err != nil{
 			c.JSON(http.StatusBadRequest,NomalErrorResponse(err))
+			panic(err)
 			return
 		}
 		c.JSON(http.StatusOK,p)

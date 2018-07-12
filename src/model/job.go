@@ -1,4 +1,4 @@
-package domain
+package model
 
 import (
 	"github.com/jinzhu/gorm"
@@ -12,7 +12,6 @@ type Job struct {
 
 func (Job) Migrate(db *gorm.DB)error{
 	initData := []Job{
-		{Name:"エンジニア"},
 		{Name:"学生"},
 		{Name:"営業"},
 	}

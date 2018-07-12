@@ -42,9 +42,9 @@ type DeleteOption struct {
 type Method interface {
 	Get(*gin.Context)(interface{},error)
 	GetAll(*gin.Context)(interface{},error)
-	Create(*gin.Context)error
-	Update(*gin.Context)error
-	Delete(*gin.Context)error
+	Create(*gin.Context)(interface{},error)
+	Update(*gin.Context)(interface{},error)
+	Delete(*gin.Context)(interface{},error)
 }
 
 func callExist(c *gin.Context,f func(g *gin.Context)error)error{

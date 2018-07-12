@@ -3,7 +3,7 @@ import (
 	"github.com/ryomak/brand_web/src/util"
 	"flag"
 	"github.com/sirupsen/logrus"
-	"github.com/ryomak/encuentro/src/model/domain"
+	"github.com/ryomak/encuentro/src/model"
 )
 
 var config util.Config
@@ -15,12 +15,12 @@ func init(){
 }
 
 func main() {
-	tables := []domain.ModelInterface{
-		domain.Event{},
-		domain.Job{},
-		domain.Restaurant{},
-		domain.Tag{},
-		domain.User{},
+	tables := []model.ModelInterface{
+		model.Event{},
+		model.Job{},
+		model.Restaurant{},
+		model.Tag{},
+		model.User{},
 	}
 	db := util.ConnectDB(config.Database)
 	for _,v := range tables{

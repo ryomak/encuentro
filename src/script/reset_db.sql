@@ -1,4 +1,4 @@
-CREATE USER IF NOT EXISTS 'app'@'localhost' ;
-drop database if exists encuentro;
+CREATE USER IF NOT EXISTS 'app'@'localhost' IDENTIFIED BY 'password';
+drop database IF exists encuentro;
 create database encuentro;
-grant all on encuentro.* to app;
+GRANT ALL ON `encuentro`.* TO 'app'@'localhost' IDENTIFIED BY 'password';

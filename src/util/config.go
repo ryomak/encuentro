@@ -5,22 +5,20 @@ import (
 )
 
 type Config struct {
-	Env               string // "development" or "production"
-	Port              string // application listen port
-	PublicKeyPath     string // auth server's public key
-	Database          DBConfig `toml:"database"`
+	Env           string   // "development" or "production"
+	Port          string   // application listen port
+	PublicKeyPath string   // auth server's public key
+	Database      DBConfig `toml:"database"`
 }
 
 type DBConfig struct {
-	User string
+	User     string
 	Password string
 	Database string
-	Host string
-	Port string
-	Debug bool
+	Host     string
+	Port     string
+	Debug    bool
 }
-
-
 
 func LoadConfig(filePath string) Config {
 	var config Config

@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/jinzhu/gorm"
 	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 	"github.com/ryomak/brand_web/src/util"
 )
 
@@ -17,7 +17,7 @@ func TransactionMiddleware(db *gorm.DB) gin.HandlerFunc {
 
 			}
 		}()
-		c.Set(util.DATABASEKEY,tx)
+		c.Set(util.DATABASEKEY, tx)
 
 		c.Next()
 	}

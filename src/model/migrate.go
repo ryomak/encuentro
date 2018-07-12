@@ -5,8 +5,7 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-
 type ModelInterface interface {
-	Migrate(*gorm.DB)error
+	Migrate(*gorm.DB) error
 	Validate(validator.Validate)
 }

@@ -1,21 +1,22 @@
 package main
 
 import (
-	"github.com/ryomak/encuentro/src/router"
-	"github.com/ryomak/encuentro/src/util"
 	"flag"
 	"github.com/gin-gonic/gin"
+	"github.com/ryomak/encuentro/src/router"
+	"github.com/ryomak/encuentro/src/util"
 )
+
 var config util.Config
 
-func init(){
+func init() {
 	cPath := flag.String("config", "./config.toml", "path to config file")
 	flag.Parse()
 	config = util.LoadConfig(*cPath)
 }
 
-func main(){
+func main() {
 	gin.SetMode(config.Env)
 	router := router.InitRoute(util.ConnectDB(config.Database))
-	router.Run(":"+config.Port)
+	router.Run(":" + config.Port)
 }

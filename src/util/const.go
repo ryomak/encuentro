@@ -1,12 +1,13 @@
 package util
 
-const(
+const (
 	DATABASEKEY = "DB"
 )
+
 //Tag
 const (
-	None = 0
-	MALE = 1
+	None   = 0
+	MALE   = 1
 	FEMALE = 2
-	BOTH = 3
+	BOTH   = 3
 )

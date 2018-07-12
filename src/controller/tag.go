@@ -5,5 +5,4 @@ import (
 	"github.com/ryomak/encuentro/src/util"
 )
 
-var TagEndpoint = util.NewHandler(model.Tag{},&util.ApiHandler{})
-
+var TagEndpoint = util.NewHandler(model.Tag{}, &util.ApiHandler{})

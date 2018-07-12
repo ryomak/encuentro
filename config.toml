@@ -4,8 +4,8 @@ Port = "8000"
 PublicKeyPath = "./public-key.pem"
 [database]
     # MySQL接続設定
-    User = "root"
-    Password = ""
+    User = "app"
+    Password = "password"
     Database = "encuentro"
     Host  = "localhost"
     Port = "3306"

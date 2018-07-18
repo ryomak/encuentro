@@ -12,8 +12,9 @@ type Event struct {
 	MenNumber    uint       `json:"men_number"`
 	WomenNumber  uint       `json:"women_number"`
 	RestaurantID uint       `json:"restaurant_id"`
-	Restaurant   Restaurant `json:"restaurant" gorm:"foreignkey:RestaurantID"`
-	Tags         []Tag      `json:"tags" gorm:"many2many:event_tags;"`
+	Restaurant   Restaurant `json:"restaurant" gorm:"foreignkey:RestaurantID;association_autocreate:false;association_autoupdate:false"`
+	Tags         []Tag      `json:"tags" gorm:"many2many:event_tags;gorm:association_autocreate:false;association_autoupdate:false"`
+	Users        []User     `json:"book" gorm:"many2many:event_users;gorm:association_autocreate:false;association_autoupdate:false"`
 }
 
 //もしいるなら
@@ -34,6 +35,17 @@ func (Event) Migrate(db *gorm.DB) error {
 				Price:   3000,
 			},
 			Tags: []Tag{{Name: "CA", Gender: util.FEMALE}},
+			Users: []User{
+				User{
+					Name:   "初期女",
+					Age:    28,
+					Gender: util.FEMALE,
+					Income: 300,
+					LineID: "eeee",
+					Mail:   "test@a.com",
+					Phone:  "090",
+				},
+			},
 		},
 	}
 	for _, v := range initData {

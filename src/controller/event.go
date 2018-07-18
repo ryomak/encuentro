@@ -8,4 +8,6 @@ import (
 var EventEndpoint = util.NewHandler(model.Event{}, &util.ApiHandler{
 	GetHandler:    util.GetHandler(model.Event{}, util.GetOption{}),
 	GetAllHandler: util.GetAllHandler(model.Event{}, util.GetOption{}),
+	CreateHandler: util.CreateHandler(model.Event{}, util.CreateOption{}),
+	UpdateHandler: util.UpdateHandler(model.Event{}, util.UpdateOption{}),
 })

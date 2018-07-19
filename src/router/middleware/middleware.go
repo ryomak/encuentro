@@ -38,3 +38,8 @@ func CORSMiddleware() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+func AuthJWTMiddleware(db *gorm.DB) gin.HandlerFunc {
+
+	return
+}

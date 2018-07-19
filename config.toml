@@ -2,6 +2,7 @@
 Env = "debug"
 Port = "8000"
 PublicKeyPath = "./public-key.pem"
+ConfigPath = "./config.toml"
 [database]
     # MySQL接続設定
     User = "app"

@@ -1,24 +1,12 @@
-# README
+## Mysqlをインストール
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+``brew install mysql2``
 
-Things you may want to cover:
+## 実行
 
-* Ruby version
+``bundle install --path vendor/bundle``
 
-* System dependencies
+## データベースのセットアップ
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+``rails db:create``
+``rails db:migrate``

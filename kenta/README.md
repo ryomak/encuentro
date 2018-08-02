@@ -78,3 +78,9 @@
  ### PUT /users
  ### response 200
  
+ ### ユーザ削除
+ ### DELETE /users/:id
+ ### response 204
+ 
+ 
+ 

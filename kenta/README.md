@@ -23,7 +23,7 @@
     "id": 1,
     "name": "松岡裕典0",
     "sex": "female",
-    "mail": "sample0@sample.com",
+    "email": "sample0@sample.com",
     "birthday": "1996/0/05",
     "university": "同志社",
     "created_at": "2018-08-01T18:13:26.000Z",
@@ -33,7 +33,7 @@
     "id": 3,
     "name": "松岡裕典2",
     "sex": "female",
-    "mail": "sample2@sample.com",
+    "email": "sample2@sample.com",
     "birthday": "1996/2/05",
     "university": "同志社",
     "created_at": "2018-08-01T18:13:26.000Z",
@@ -52,7 +52,7 @@
   "id": 1,
   "name": "松岡裕典0",
   "sex": "female",
-  "mail": "sample0@sample.com",
+  "email": "sample0@sample.com",
   "birthday": "1996/0/05",
   "university": "同志社",
   "created_at": "2018-08-01T18:13:26.000Z",
@@ -67,7 +67,7 @@
 ```
 name - 氏名 not null
 sex - 性別(male/female) not null
-mail - メアド not null
+email - メアド not null
 birthday - 生年月日(xxxx/xx/xx) nut null
 university - 大学
 ```

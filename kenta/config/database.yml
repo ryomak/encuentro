@@ -11,10 +11,10 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: encuentro_development
+  database: encuentro
   pool: 5
-  username: root
-  password:
+  username: app
+  password: password
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and

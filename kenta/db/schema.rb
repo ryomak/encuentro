@@ -27,12 +27,13 @@ ActiveRecord::Schema.define(version: 20180802175611) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.string "sex", null: false
-    t.string "mail", null: false
-    t.string "birthday", null: false
+    t.string "password_digest", null: false
+    t.string "email", null: false
+    t.datetime "birthday", null: false
     t.string "university"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mail"], name: "index_users_on_mail", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "plans", "users"

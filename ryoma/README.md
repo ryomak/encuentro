@@ -2,17 +2,17 @@
 
 ## Project setup
 ```
-npm install
+make deps
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+make run-local
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+make build
 ```
 
 ### Lints and fixes files

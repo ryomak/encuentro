@@ -1,4 +1,4 @@
-class PlansController < ApplicationController
+class Api::V1::PlansController < ApplicationController
   before_action :set_plan, only: %i[show update destroy]
 
   def index

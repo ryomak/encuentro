@@ -12,9 +12,15 @@
 
 ``rails db:migrate``
 
+or 
+
+``make db/init ``
+
 # sampleデータ入れ
 
 ``rails db:seed``
+or 
+`` make db/seed `` 
 
 # 仕様書
 <!--

@@ -1,9 +1,9 @@
-class Api::V1::UserController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   before_action :authenticate_user, only: %i[show update destroy]
   before_action :load_resource
 
   def show
-    render json: @user
+    render json: { user: @user, plans: @user.plans }
   end
 
   #signup処理ここでやってる
@@ -35,7 +35,7 @@ class Api::V1::UserController < ApplicationController
   def load_resource
     case params[:action].to_sym
       when :show, :update
-        @user = User.select(:name, :sex, :email, :birthday, :university).find(current_user.id)
+        @user = User.select(:id, :name, :sex, :email, :birthday, :university).find(current_user.id)
       when :destroy
         @user = User.find(current_user.id)
       end

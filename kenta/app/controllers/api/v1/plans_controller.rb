@@ -1,4 +1,5 @@
 class Api::V1::PlansController < ApplicationController
+  before_action :authoritative
   before_action :set_plan, only: %i[show update destroy]
 
   def index
@@ -13,7 +14,7 @@ class Api::V1::PlansController < ApplicationController
   def create
     plan = Plan.new(plan_params)
     plan.user = set_user
-    if plan.save!
+    if plan.save
       render json: plan, status: 201
     else
       render json: { errors: plan.errors }, status: 422
@@ -36,7 +37,7 @@ class Api::V1::PlansController < ApplicationController
   private
 
   def set_user
-    User.find(params[:user_id])
+    User.find(current_user.id)
   end
 
   def set_plan

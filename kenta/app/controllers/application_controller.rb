@@ -3,8 +3,8 @@ class ApplicationController < ActionController::API
 
   private
   def admin_user?
-    if current_user.status.admin?
-      render json: { text: "reject" }
+    if !current_user.status
+      render json: { text:  "reject"}
     end
   end
 end

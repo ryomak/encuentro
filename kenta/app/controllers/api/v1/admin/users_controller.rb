@@ -8,7 +8,7 @@ class Api::V1::Admin::UsersController < ApplicationController
   end
 
   def show
-    render json: @user
+    render json: { user: @user, plans: @user.plans }
   end
 
   def update

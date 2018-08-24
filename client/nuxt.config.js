@@ -15,7 +15,7 @@ module.exports = {
   },
   build: {
     vendor: ['axios']
-  }
+  },
   /*
   ** Customize the progress bar color
   */

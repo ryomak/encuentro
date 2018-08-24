@@ -13,6 +13,7 @@ run-local:
 .PHONY: build
 build:
 	npm run build
+	cp -a ./dist ../bootstrapping/release
 	# find ./dist -name *.map | xargs rm
 
 .PHONY: deps

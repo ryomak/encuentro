@@ -13,6 +13,9 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  build: {
+    vendor: ['axios']
+  }
   /*
   ** Customize the progress bar color
   */

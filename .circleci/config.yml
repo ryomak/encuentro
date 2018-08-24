@@ -86,7 +86,7 @@ jobs:
       - checkout
 
       - run:
-          name: develop-deps
+          name:  develop-deps
           command: make develop-deps
       - run:
           name: heroku deploy-develop

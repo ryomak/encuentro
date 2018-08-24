@@ -90,7 +90,7 @@ jobs:
           command: make develop-deps
       - run:
           name: heroku deploy-develop
-          command: git subtree push --prefix=client heroku master
+          command: git subtree push --prefix=client git@heroku.com:circleci-heroku.git $CIRCLE_SHA1:master
           #command: make develop-push
            
 ##workflows:

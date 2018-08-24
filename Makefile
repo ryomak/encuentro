@@ -8,9 +8,9 @@ reset-db:
 	sh ./script/reset_db.sh 
 
 develop-deps:
-	cd client && npm run build
+	cd client && make deps
 
   
-develop-push:develop-deps
+develop-push:
 	#develop-client deploy
 	git subtree push --prefix=client heroku master

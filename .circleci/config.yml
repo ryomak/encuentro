@@ -1,0 +1,122 @@
+version: 2
+jobs:
+###rails-checkout:
+### working_directory: ~/repo
+### docker:
+###    - image: circleci/ruby:2.4.1-node-browsers
+### steps:
+###   - checkout
+###   # Download and cache dependencies
+###   - restore_cache:
+###       keys:
+###       - v1-dependencies-{{ checksum "Gemfile.lock" }}
+###       # fallback to using the latest cache if no exact match is found
+###       - v1-dependencies-
+###   - run:
+###       name: install dependencies
+###       command: |
+###         bundle install --jobs=4 --retry=3 --path vendor/bundle
+###   - save_cache:
+###       paths:
+###         - ./vendor/bundle
+###       key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+###rails-server:
+### working_directory: ~/repo
+### docker:
+###    - image: circleci/ruby:2.4.1-node-browsers
+### steps:
+###   - checkout
+###   # Download and cache dependencies
+###   - restore_cache:
+###       keys:
+###       - v1-dependencies-{{ .Environment.CIRCLE_SHA1 }}
+###       # fallback to using the latest cache if no exact match is found
+###       - v1-dependencies-
+
+###   - run:
+###       name: rails server
+###       command: |
+###         make deps-server
+###   - save_cache:
+###       paths:
+###         - ./vendor/bundle
+###       key: v1-dependencies-{{ .Environment.CIRCLE_SHA1 }}
+###       
+###heckout-client:
+### working_directory: ~/repo
+### docker:
+###   - image: circleci/node:8.2.1
+### steps:
+###   - checkout
+###   - run: shasum ksk/package.json ryoma/package.json > /tmp/checksum.tmp
+###   - restore_cache:
+###       key: v1-dependencies-client-{{ checksum "/tmp/checksum.tmp" }}
+###   - run:
+###       name: Install dependencies
+###       command: make deps-client
+###   - save_cache:
+###       key: v1-dependencies-client-{{ checksum "/tmp/checksum.tmp" }}
+###       paths:
+###         - ksk/node_modules
+###         - ryoma/node_modules
+###   - save_cache:
+###       key: v1-repo-client-{{ .Environment.CIRCLE_SHA1 }}
+###       paths:
+###         - .
+###uild-client:
+### working_directory: ~/repo
+### docker:
+###   - image: circleci/node:8.2.1
+### steps:
+###   - restore_cache:
+###       key: v1-repo-client-{{ .Environment.CIRCLE_SHA1 }}
+###   - run:
+###       name: Build src
+###       command: make build-client
+###   - save_cache:
+###       key: v1-build-client-{{ .Environment.CIRCLE_SHA1 }}
+###       paths:
+###         - release/client
+
+  deploy-develop:
+    docker:
+      - image: circleci/php:7.1.8-browsers
+    steps:
+      - checkout
+      - run:
+          name: heroku deploy-develop
+          command: |
+
+            make develop-push
+           
+##workflows:
+##version: 2
+##build:
+##   jobs:
+##    - rails-checkout:
+##        filters:
+##            branches:
+##            only:
+##              - develop
+##    - rails-server:
+##        filters:
+##          branches:
+##            only:
+##              - develop
+##   - deploy-develop:
+##        requires:
+##          - rails-sercer
+##          - build-client
+##        filters:
+##          branches:
+##            only: develop
+#
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - deploy-develop:
+          filters:
+            branches:
+              only: develop 

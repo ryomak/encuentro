@@ -81,14 +81,16 @@ jobs:
 
   deploy-develop:
     docker:
-      - image: circleci/php:7.1.8-browsers
+      - image: node:9.4.0
     steps:
       - checkout
+
+      - run:
+          name: develop-deps
+          command: make develop-deps
       - run:
           name: heroku deploy-develop
-          command: |
-
-            make develop-push
+          command: make develop-push
            
 ##workflows:
 ##version: 2

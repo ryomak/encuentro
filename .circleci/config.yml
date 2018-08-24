@@ -88,7 +88,7 @@ jobs:
           name: heroku deploy-develop
           command: |
             make develop-deps
-            cd server && git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git develop
+            cd server && git subtree push --prefix server https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git develop
            
 ##workflows:
 ##version: 2

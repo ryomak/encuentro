@@ -80,7 +80,8 @@ jobs:
 ###         - release/client
 
   deploy-develop:
-    
+    docker:
+      - image: circleci/php:7.1.8-browsers
     steps:
       - checkout
       - run:

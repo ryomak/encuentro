@@ -90,7 +90,8 @@ jobs:
           command: make develop-deps
       - run:
           name: heroku deploy-develop
-          command: make develop-push
+          command: git subtree push --prefix=client heroku master
+          #command: make develop-push
            
 ##workflows:
 ##version: 2

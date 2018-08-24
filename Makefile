@@ -25,5 +25,5 @@ build-client-ryoma:
 	cd ryoma && make build
 	mv ryoma/dist $(CLIENT_OUTPUT_DIR)/ryoma
 
-develop--deps:
-
+develop-push:
+	git subtree push --prefix=client heroku master

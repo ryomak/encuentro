@@ -15,35 +15,6 @@
 ``make db/seed_user``
 
 # 仕様書
-<!--
-## ユーザ一覧取得
-###  GET /users
-### response 200
-```
-[
-  {
-    "id": 1,
-    "name": "松岡裕典0",
-    "sex": "female",
-    "email": "sample0@sample.com",
-    "birthday": "1996/0/05",
-    "university": "同志社",
-    "created_at": "2018-08-01T18:13:26.000Z",
-    "updated_at": "2018-08-01T18:13:26.000Z"
-  },
-  {
-    "id": 3,
-    "name": "松岡裕典2",
-    "sex": "female",
-    "email": "sample2@sample.com",
-    "birthday": "1996/2/05",
-    "university": "同志社",
-    "created_at": "2018-08-01T18:13:26.000Z",
-    "updated_at": "2018-08-01T18:13:26.000Z"
-  },
-]
- ```
--->
 
 ## ログイン
 ### POST api/v1/login
@@ -90,7 +61,7 @@ university - 大学
 }
 ```
 
-##ユーザ情報
+## ユーザ情報
 ### GET api/v1/user
 ### response 200
 
@@ -145,6 +116,39 @@ university - 大学
 ### GET api/v1/user/plans/:id
 ### response 200
 
+出力
+```
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "date": "2018-07-16T00:00:00.000Z",
+    "place": "大阪",
+    "drink": "あり",
+    "course": "高学歴コース",
+    "status": 0,
+    "created_at": "2018-08-26T05:24:22.000Z",
+    "updated_at": "2018-08-26T05:24:22.000Z"
+  },
+  {
+    "id": 2,
+    "user_id": 1,
+    "date": "2018-07-18T00:00:00.000Z",
+    "place": "兵庫",
+    "drink": "あり",
+    "course": "低学歴コース",
+    "status": 0,
+    "created_at": "2018-08-26T05:24:22.000Z",
+    "updated_at": "2018-08-26T05:24:22.000Z"
+  }
+]
+```
+
+## 予定を追加
+### POST api/v1/user/plans
+### response 201
+
+
 ## 予定の詳細を取得
 ### GET api/v1/user/plans/:id
 ### response 200
@@ -164,41 +168,22 @@ university - 大学
 }
 ```
 
-## 予定を追加
-### POST api/v1/user/plans
-### response 200
-
-```
-{
-    "id": 1,
-    "user_id": 1,
-    "date": "2018-07-16T00:00:00.000Z",
-    "place": "大阪",
-    "drink": "あり",
-    "course": "高学歴コース",
-    "status": 0,
-    "created_at": "2018-08-26T05:24:22.000Z",
-    "updated_at": "2018-08-26T05:24:22.000Z"
-}
-```
-
 ## 予定の追加
-### POST /user/plans
+### POST api/v1/user/plans
 ### response 201
-### key
 
+入力
 ```
 date - 日付 not null (xxxx-xx-xxT00:00:00.000Z)
 place - 場所 not null
 drink - 飲酒 not null
 course - なんかコース的な not null
-status - マッチングしたかしてないか not null
 ```
 
 ## 予定の変更
-### PUT /user/plans/:id
+### PUT api/v1/user/plans/:id
 ### response 200
 
 ## 予定の削除
-### DELETE /user/plans/:id
+### DELETE api/v1/user/plans/:id
 ### response 204

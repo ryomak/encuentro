@@ -1,10 +1,11 @@
-User.seed_once(:id) do |s|
-  s.name = 'Admin'
-  s.sex = 'male'
-  s.email = 'admin@user.com'
-  s.password = 'admin'
-  s.password_confirmation = 'admin'
-  s.birthday = '1996/07/16'
-  s.status = true
-  s.university = '同志社大学生'
-end
+User.seed(:id,
+  {
+    name: 'admin',
+    sex:'male',
+    email: 'admin@sample.com',
+    password: 'admin',
+    password_confirmation: 'admin',
+    university: 'けんたチュキチュキクラブ',
+    birthday: '1988/06/11',
+    status: true
+})

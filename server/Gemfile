@@ -23,6 +23,8 @@ gem 'knock'
 
 gem 'rename'
 
+gem 'rack-cors'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

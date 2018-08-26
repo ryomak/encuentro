@@ -8,19 +8,11 @@
 
 # データベースのセットアップ
 
-``rails db:create``
-
-``rails db:migrate``
-
-or 
-
 ``make db/init ``
 
 # sampleデータ入れ
 
-``rails db:seed``
-or 
-`` make db/seed `` 
+``make db/seed_user``
 
 # 仕様書
 <!--
@@ -53,26 +45,31 @@ or
  ```
 -->
 
-## ログインユーザ情報取得
-### GET /user
-### response 200
+## ログイン
+### POST api/v1/login
+入力
 
 ```
-#id=1の時(/users/1)
+JSON
+
+{"auth": {"email": "メアド", "password": "パスワード"}}
+
+```
+
+### response 201
+
+出力
+```
+例
 {
-  "id": 1,
-  "name": "松岡裕典0",
-  "sex": "female",
-  "email": "sample0@sample.com",
-  "birthday": "1996/0/05",
-  "university": "同志社",
+  "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzUzNDgyMzgsInN1YiI6MX0.z0jmRZXz2dbBVVCB_oZiS71ljrAuSNtHj1Q4qYSgTzI"
 }
 ```
 
 ## ユーザ登録
-### POST /singup
-### response 201
-### key
+### POST api/v1/singup
+
+入力
 ```
 name - 氏名 not null
 sex - 性別(male/female) not null
@@ -83,62 +80,105 @@ birthday - 生年月日(xxxx/xx/xx) nut null
 university - 大学
 ```
 
+### response 201
+
+出力
+```
+例
+{
+  "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzUzNDgyMzgsInN1YiI6MX0.z0jmRZXz2dbBVVCB_oZiS71ljrAuSNtHj1Q4qYSgTzI"
+}
+```
+
+##ユーザ情報
+### GET api/v1/user
+### response 200
+
+出力
+```
+{
+    "user": {
+        "id": 1,
+        "name": "新垣結衣",
+        "sex": "female",
+        "email": "yuiyui1@sample.com",
+        "birthday": "1988-06-11T00:00:00.000Z",
+        "university": "けんたチュキチュキクラブ"
+    },
+    "plans": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "date": "2018-07-16T00:00:00.000Z",
+            "place": "大阪",
+            "drink": "あり",
+            "course": "高学歴コース",
+            "status": 0,
+            "created_at": "2018-08-26T05:24:22.000Z",
+            "updated_at": "2018-08-26T05:24:22.000Z"
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "date": "2018-07-18T00:00:00.000Z",
+            "place": "兵庫",
+            "drink": "あり",
+            "course": "低学歴コース",
+            "status": 0,
+            "created_at": "2018-08-26T05:24:22.000Z",
+            "updated_at": "2018-08-26T05:24:22.000Z"
+        }
+    ]
+}
+
+```
 
 ## ユーザ情報編集
-### PUT /user
+### PUT api/v1/user
 ### response 200
 
 ## ユーザ削除
-### DELETE /user
+### DELETE api/v1/user
 ### response 204
 
-## あるユーザーの予定を取得
-### GET /user/plans
+## 予定を取得
+### GET api/v1/user/plans/:id
 ### response 200
 
+## 予定の詳細を取得
+### GET api/v1/user/plans/:id
+### response 200
+
+出力
 ```
-[
-  {
+{
     "id": 1,
     "user_id": 1,
-    "date": "2018-10-01T00:00:00.000Z",
-    "place": "ラブホテル",
+    "date": "2018-07-16T00:00:00.000Z",
+    "place": "大阪",
     "drink": "あり",
-    "course": "おっぱいコース",
+    "course": "高学歴コース",
     "status": 0,
-    "created_at": "2018-08-03T16:24:38.000Z",
-    "updated_at": "2018-08-03T16:24:38.000Z"
-  },
-  {
-    "id": 2,
-    "user_id": 1,
-    "date": "2018-10-02T00:00:00.000Z",
-    "place": "ラブホテル",
-    "drink": "あり",
-    "course": "おっぱいコース",
-    "status": 0,
-    "created_at": "2018-08-03T16:24:38.000Z",
-    "updated_at": "2018-08-03T16:24:38.000Z"
-  }
-]
+    "created_at": "2018-08-26T05:24:22.000Z",
+    "updated_at": "2018-08-26T05:24:22.000Z"
+}
 ```
 
-## 予定の詳細取得
-### GET /user/plans/:id
+## 予定を追加
+### POST api/v1/user/plans
 ### response 200
 
 ```
-id=1の時(/user/plans/1)
 {
-  "id": 1,
-  "user_id": 1,
-  "date": "2018-10-01T00:00:00.000Z",
-  "place": "ラブホテル",
-  "drink": "あり",
-  "course": "おっぱいコース",
-  "status": 0,
-  "created_at": "2018-08-03T16:24:38.000Z",
-  "updated_at": "2018-08-03T16:24:38.000Z"
+    "id": 1,
+    "user_id": 1,
+    "date": "2018-07-16T00:00:00.000Z",
+    "place": "大阪",
+    "drink": "あり",
+    "course": "高学歴コース",
+    "status": 0,
+    "created_at": "2018-08-26T05:24:22.000Z",
+    "updated_at": "2018-08-26T05:24:22.000Z"
 }
 ```
 

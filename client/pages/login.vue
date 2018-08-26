@@ -1,24 +1,34 @@
 <template>
+
+
   <div class="all">
     <b-container>
         <h1 class="title">
           encuentro
         </h1>
-        <h2 class="subtitle">
-          退屈な時間に新たな出会いを
-        </h2>
+        <ul class="entry-form">
+          <li>e-mail
+            <input type=text>
+          </li>
+          <li>password
+            <input type=text>
+          </li>
+
+        </ul>
+
         <div class="links">
           <a
-            href="/login"
+              href="https://nuxtjs.org/"
             target="_blank"
-            class="button--white">Start</a>
+            class="button--white">Login</a>
           <a
             href="https://github.com/nuxt/nuxt.js"
             target="_blank"
             class="button--white">What is encuentro?</a>
-          </div>
+        </div>
       </b-container>
-    </div>
+  </div>
+
 </template>
 
 <script>
@@ -34,14 +44,14 @@ export default {
 <style>
 
 .all{
-  padding: 0px 0px;
+  margin:0px;
+  padding:0px;
   background-image: url("../assets/image.png");
-  background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  background-attachment: scroll;
+  background-position: left top;
+  justify-content: center;
   text-align: center;
-  background-color: #151A37;
 }
 
 
@@ -54,20 +64,28 @@ export default {
   width: 100%;
   color: white;
   letter-spacing: 1px;
+  margin-top: 5vh;
   margin-bottom: 15vh;
 }
 
-.subtitle {
+.entry-form {
   font-weight: 300%;
   font-size: 5vw;
   width: 100%;
   color: white;
   word-spacing: 5px;
+  list-style: none;
+  margin-bottom: 5vh;
 }
 
 .links {
   padding-top: 15px;
   padding-bottom: 15px;
   margin-top:5vh;
+  margin-bottom:8vh;
+}
+
+li {
+  margin-bottom:2vh;
 }
 </style>

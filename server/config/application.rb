@@ -16,7 +16,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Kenta
+module Server
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
@@ -29,5 +29,11 @@ module Kenta
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Credentials' => 'true',
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => '*'
+    }
   end
 end

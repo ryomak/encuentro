@@ -1,30 +1,28 @@
 <template>
-
-
   <div class="all">
     <b-container>
         <h1 class="title">
           encuentro
         </h1>
-        <ul class="entry-form">
-          <li>e-mail
-            <input type=text>
-          </li>
-          <li>password
-            <input type=text>
-          </li>
-
-        </ul>
-
+        <div class="entry-form">
+          Email
+          <b-form-input 
+            type="text"
+            v-model="email"
+            placeholder="Enter your email"></b-form-input>
+          Password
+          <b-form-input 
+            type="text"
+            v-model="password"
+            placeholder="Enter your password"></b-form-input>
+        </div>
         <div class="links">
-          <a
-              href="https://nuxtjs.org/"
-            target="_blank"
-            class="button--white">Login</a>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            class="button--white">What is encuentro?</a>
+          <b-button 
+            class="button--white"
+            @click="login">Login</b-button>
+          <b-button 
+            class="button--white"
+            >What is encuentro</b-button>
         </div>
       </b-container>
   </div>
@@ -32,11 +30,25 @@
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-
 export default {
-  components: {
-    AppLogo
+  data(){
+    return{
+      email:"",
+      password:"",
+    }
+  },
+  methods:{
+    login(){
+      const conf={
+        auth:{
+          email:this.email,
+          password:this.password,
+        }
+      }
+      this.$axios.post('/api/v1/login',conf).then(res=>{
+        console.log(res.data.jwt)
+      })
+    }
   }
 }
 </script>
@@ -47,9 +59,11 @@ export default {
   margin:0px;
   padding:0px;
   background-image: url("../assets/image.png");
+  background-size: cover;
+  background-size:contain;
   background-repeat: no-repeat;
   background-attachment: scroll;
-  background-position: left top;
+  background-position: center;
   justify-content: center;
   text-align: center;
 }

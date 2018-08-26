@@ -1,12 +1,14 @@
 module.exports = {
 
   modules: [
-    'bootstrap-vue/nuxt',
-
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     // Or if you have custom bootstrap CSS...
-    ['bootstrap-vue/nuxt', { css: false }],
+    ['bootstrap-vue/nuxt'],
   ],
-
+  plugins: [
+    '~/plugins/axios'
+  ],
 
   /*
   ** Headers of the page
@@ -21,9 +23,6 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
-  },
-  build: {
-    vendor: ['axios']
   },
   /*
   ** Customize the progress bar color
@@ -46,5 +45,11 @@ module.exports = {
         })
       }
     }
+  },
+  axios:{
+    proxy:true,
+  },
+  proxy:{
+    '/api/': process.env.USE_LOCAL_SERVER ? 'http://localhost:3000' : 'http://localhost:3000',
   }
 }

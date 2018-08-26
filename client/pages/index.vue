@@ -1,25 +1,27 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        ksk
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
-  </section>
+
+
+  <div class="all">
+    <b-container>
+        <h1 class="title">
+          encuentro
+        </h1>
+        <h2 class="subtitle">
+          退屈な時間を新たな出会いに
+        </h2>
+        <div class="links">
+          <a
+            href="https://nuxtjs.org/"
+            target="_blank"
+            class="button--white">Start</a>
+          <a
+            href="https://github.com/nuxt/nuxt.js"
+            target="_blank"
+            class="button--white">What is encuentro?</a>
+          </div>
+      </b-container>
+  </div>
+
 </template>
 
 <script>
@@ -33,33 +35,44 @@ export default {
 </script>
 
 <style>
-.container {
-  min-height: 100vh;
-  display: flex;
+
+.all{
+  margin:0px;
+  padding:0px;
+  background-image: url("../assets/image.png");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: left top;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
+
+
 
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
+  font-weight: 100%;
+  font-size: 10vw;
+  width: 100%;
+  color: white;
   letter-spacing: 1px;
+  margin-top: 5vh;
+  margin-bottom: 15vh;
 }
 
 .subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
+  font-weight: 300%;
+  font-size: 5vw;
+  width: 100%;
+  color: white;
   word-spacing: 5px;
-  padding-bottom: 15px;
 }
 
 .links {
   padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top:5vh;
+  margin-bottom:8vh;
 }
 </style>
-

@@ -1,19 +1,5 @@
 <template>
   <section class="container">
-    <table>
-      <thead>
-        <tr>
-          <th>タイトル</th>
-          <th>作者</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="r in reports" :key="r.id">
-          <td><a :href="r.url">{{r.title}}</a></td>
-          <td>{{r.user.name}}</td>
-        </tr>        
-      </tbody>
-    </table>
   </section>
 </template>
 
@@ -25,8 +11,8 @@ export default {
     }
   },
   mounted(){
-    this.$axios.get('https://qiita.com/api/v2/items').then(res=>{
-      this.reports = res.data
+    this.$axios.post('/api/v1/login',{auth: {email: "yuiyui1@sample.com", password: "yuiyui"}}).then(res=>{
+      console.log(res.data)
     })
   }, 
 }

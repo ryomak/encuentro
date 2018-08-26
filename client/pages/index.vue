@@ -1,17 +1,15 @@
 <template>
-
-
   <div class="all">
     <b-container>
         <h1 class="title">
           encuentro
         </h1>
         <h2 class="subtitle">
-          退屈な時間に新たな出会いに
+          退屈な時間に新たな出会いを
         </h2>
         <div class="links">
           <a
-            href="https://nuxtjs.org/"
+            href="/login"
             target="_blank"
             class="button--white">Start</a>
           <a
@@ -20,8 +18,7 @@
             class="button--white">What is encuentro?</a>
           </div>
       </b-container>
-  </div>
-
+    </div>
 </template>
 
 <script>
@@ -37,14 +34,14 @@ export default {
 <style>
 
 .all{
-  margin:0px;
-  padding:0px;
+  padding: 0px 0px;
   background-image: url("../assets/image.png");
+  background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: left top;
-  justify-content: center;
+  background-attachment: fixed;
+  background-size: cover;
   text-align: center;
+  background-color: #151A37;
 }
 
 
@@ -57,7 +54,6 @@ export default {
   width: 100%;
   color: white;
   letter-spacing: 1px;
-  margin-top: 5vh;
   margin-bottom: 15vh;
 }
 
@@ -73,6 +69,5 @@ export default {
   padding-top: 15px;
   padding-bottom: 15px;
   margin-top:5vh;
-  margin-bottom:8vh;
 }
 </style>

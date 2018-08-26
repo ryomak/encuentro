@@ -7,7 +7,7 @@
           encuentro
         </h1>
         <h2 class="subtitle">
-          退屈な時間を新たな出会いに
+          退屈な時間に新たな出会いに
         </h2>
         <div class="links">
           <a

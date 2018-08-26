@@ -50,6 +50,6 @@ module.exports = {
     proxy:true,
   },
   proxy:{
-    '/api/': process.env.USE_LOCAL_SERVER ? 'http://localhost:3000' : 'http://localhost:3000',
+    '/api': process.env.USE_LOCAL_SERVER ? 'http://localhost:3000' : 'http://aaa.com',
   }
 }

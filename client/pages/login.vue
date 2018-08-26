@@ -45,7 +45,7 @@ export default {
           password:this.password,
         }
       }
-      this.$axios.post('/api/v1/login',conf).then(res=>{
+      this.$axios.$post('/api/v1/login',conf).then(res=>{
         console.log(res.data.jwt)
       })
     }

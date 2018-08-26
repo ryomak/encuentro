@@ -46,7 +46,9 @@ export default {
         }
       }
       this.$axios.$post('/api/v1/login',conf).then(res=>{
-        console.log(res.data.jwt)
+        this.$store.dispatch("login",res)
+      }).then(res=>{
+        window.location.href = "/main"
       })
     }
   }

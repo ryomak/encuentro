@@ -1,19 +1,7 @@
 <template>
   <section class="container">
-    <table>
-      <thead>
-        <tr>
-          <th>タイトル</th>
-          <th>作者</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="r in reports" :key="r.id">
-          <td><a :href="r.url">{{r.title}}</a></td>
-          <td>{{r.user.name}}</td>
-        </tr>        
-      </tbody>
-    </table>
+    {{data.user}}
+    {{data.plans}}
   </section>
 </template>
 
@@ -21,12 +9,12 @@
 export default {
   data(){
     return{
-      reports:[],
+      data:{},
     }
   },
   mounted(){
-    this.$axios.get('https://qiita.com/api/v2/items').then(res=>{
-      this.reports = res.data
+    this.$axios.$get("/api/v1/user").then(res=>{
+      this.data = res
     })
   }, 
 }

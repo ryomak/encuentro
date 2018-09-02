@@ -61,6 +61,23 @@ university - 大学
 }
 ```
 
+## ログイン確認
+### GET api/v1/ping
+ログイン時
+### response 200
+```
+{
+  "message": "ログイン中です"
+}
+```
+ログアウト時
+### response 401
+```
+{
+  "message": "ログアウト中です"
+}
+```
+
 ## ユーザ情報
 ### GET api/v1/user
 ### response 200

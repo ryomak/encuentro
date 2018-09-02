@@ -1,13 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import axios from '@/assets/axios';
 
 Vue.use(Vuex)
-
-axios.interceptors.request.use(config => {
-  config.headers['Authorization']    = `Bearer ${localStorage.getItem('jwt-token')}`
-  return config
-})
 
 export default new Vuex.Store({
   state: {
@@ -40,7 +35,7 @@ export default new Vuex.Store({
     },
 
     login: ({ state }) => {
-      axios.post('http://0.0.0.0:3000/api/v1/login',{auth:state.auth})
+      axios.axios.post('api/v1/login',{auth:state.auth})
         .then((res) => {
           const status = res.status
           switch(status) {
@@ -52,7 +47,7 @@ export default new Vuex.Store({
     },
 
     getUser: ({ commit, state }) => {
-      axios.get('http://0.0.0.0:3000/api/v1/admin/users')
+      axios.axios.get('/api/v1/admin/users')
         .then((res) => {
           const status = res.status
           console.log(res)

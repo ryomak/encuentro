@@ -29,7 +29,6 @@ export default {
   text-align: center;
 }
 thead {
-    background-color: #3f87a6;
     color: #fff;
 }
 

@@ -19,17 +19,6 @@ export default {
 
 <style>
 
-.all{
-  padding: 0px 0px;
-  background-image: url("../assets/image.png");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  text-align: center;
-  background-color: #151A37;
-}
-
 
 
 .title {

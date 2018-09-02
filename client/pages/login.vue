@@ -1,6 +1,5 @@
 <template>
-  <div class="all">
-    <b-container>
+    <b-container class="bg all" fluid>
         <h1 class="title">
           encuentro
         </h1>
@@ -17,16 +16,14 @@
             placeholder="Enter your password"></b-form-input>
         </div>
         <div class="links">
-          <b-button 
-            class="button--white"
-            @click="login">Login</b-button>
-          <b-button 
-            class="button--white"
-            >What is encuentro</b-button>
+          <ul>
+            <li class="button--white"
+                @click="login">Login</li>
+            <li class="button--white">
+                What is encuentro</li>
+          </ul>
         </div>
       </b-container>
-  </div>
-
 </template>
 
 <script>
@@ -55,28 +52,22 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 .all{
-  margin:0px;
-  padding:0px;
-  background-image: url("../assets/image.png");
-  background-size: cover;
-  background-size:contain;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center;
   justify-content: center;
   text-align: center;
 }
 
+.bg{
+  width: 100%;
+  background-color: #151A37;
+}
 
 
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 100%;
-  font-size: 10vw;
   width: 100%;
   color: white;
   letter-spacing: 1px;
@@ -86,22 +77,14 @@ export default {
 
 .entry-form {
   font-weight: 300%;
-  font-size: 5vw;
   width: 100%;
   color: white;
-  word-spacing: 5px;
   list-style: none;
-  margin-bottom: 5vh;
+  
 }
 
-.links {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-top:5vh;
-  margin-bottom:8vh;
+.links{
+  
 }
 
-li {
-  margin-bottom:2vh;
-}
 </style>

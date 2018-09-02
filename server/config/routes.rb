@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'login' => 'user_token#create'
       post 'signup' => 'user#create'
+      get 'ping' => 'authenticated#ping'
       # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
       resource :user, only: [:show, :update, :destroy] do
         resources :plans

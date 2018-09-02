@@ -26,6 +26,18 @@ export default {
   created: function() {
     this.$store.dispatch('getUser')
   }
+  /*
+  data(){
+    return{
+      users:[],
+    }
+  },
+  created:function(){
+    this.$axios('/api/v1/admin/users').then(res=>{
+      console.log(res)
+    })
+  }
+  */
 }
 
 

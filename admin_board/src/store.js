@@ -57,7 +57,9 @@ export default new Vuex.Store({
               break;
           }
         })
+    },
+    logout: () => {
+      localStorage.removeItem('jwt-token')
     }
-
   },
 })

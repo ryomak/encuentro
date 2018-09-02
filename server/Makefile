@@ -8,3 +8,6 @@ db/seed:
 db/seed_user:
 	rails db:seed_fu FILTER=create_user.rb
 	rails db:seed_fu FILTER=create_admin_user.rb
+
+run:
+	rails s

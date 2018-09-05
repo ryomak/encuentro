@@ -4,13 +4,20 @@ import axios from '@/assets/axios';
 
 Vue.use(Vuex)
 
+axios.interceptors.request.use(config => {
+  config.headers['Authorization'] = `Bearer ${localStorage.getItem('jwt-token')}`
+  return config
+})
+
 export default new Vuex.Store({
   state: {
     auth: {
       email: "",
       password: ""
     },
-    users: []
+    users: [],
+
+    loginStatus: false
   },
   mutations: {
     setEmail: (state, email) => {
@@ -23,6 +30,10 @@ export default new Vuex.Store({
 
     setUsers: (state, users) => {
       state.users = users
+    },
+
+    setStatus: (state, check) => {
+      state.loginStatus = check
     }
   },
   actions: {
@@ -34,8 +45,20 @@ export default new Vuex.Store({
       commit('setPassword', password)
     },
 
+    getUser: ({ commit }) => {
+      axios.get('http://0.0.0.0:3000/api/v1/admin/users')
+        .then((res) => {
+          const status = res.status
+          switch(status) {
+            case 200:
+              commit('setUsers', res.data)
+              break;
+          }
+        })
+    },
+
     login: ({ state }) => {
-      axios.axios.post('api/v1/login',{auth:state.auth})
+      axios.axios.post('http://0.0.0.0:3000/api/v1/login',{auth:state.auth})
         .then((res) => {
           const status = res.status
           switch(status) {
@@ -46,20 +69,26 @@ export default new Vuex.Store({
         })
     },
 
-    getUser: ({ commit, state }) => {
-      axios.axios.get('/api/v1/admin/users')
+    logout: () => {
+      localStorage.removeItem('jwt-token')
+    },
+
+    loginCheck: ({ commit }) => {
+      axios.get('http://0.0.0.0:3000/api/v1/ping')
         .then((res) => {
           const status = res.status
           console.log(res)
           switch(status) {
             case 200:
-              commit('setUsers', res.data)
+              commit('setUsers', true)
+              break;
+            case 401:
+              commit('setStatus', false)
               break;
           }
         })
-    },
-    logout: () => {
-      localStorage.removeItem('jwt-token')
     }
+
+
   },
 })

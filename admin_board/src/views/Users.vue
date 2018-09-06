@@ -30,9 +30,8 @@ export default {
       this.$store.dispatch('getUser')
     }
   },
-  
+
   watch: {
-    // この関数は question が変わるごとに実行されます。
     loginStatus: function () {
       this.$store.dispatch('getUser')
     }

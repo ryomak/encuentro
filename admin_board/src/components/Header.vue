@@ -27,9 +27,8 @@ export default {
     ])
   },
 
-  created: function() {
+  created: function(){
     this.$store.dispatch('loginCheck')
   }
-
 }
 </script>

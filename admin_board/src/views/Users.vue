@@ -10,30 +10,25 @@
   </div>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState([
-      'users',
-      'loginStatus'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'getUser'
-    ])
+    ...mapState({
+      users: state => state.users.users,
+      loginStatus: state => state.login.loginStatus
+    })
   },
 
   created: function() {
     if(this.loginStatus){
-      this.$store.dispatch('getUser')
+      this.$store.dispatch('users/getUser')
     }
   },
 
   watch: {
     loginStatus: function () {
-      this.$store.dispatch('getUser')
+      this.$store.dispatch('users/getUser')
     }
   },
 

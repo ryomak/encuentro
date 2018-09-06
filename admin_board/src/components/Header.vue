@@ -16,19 +16,19 @@ import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Header',
   computed: {
-    ...mapState([
-      'loginStatus'
-    ])
+    ...mapState({
+      loginStatus: state => state.login.loginStatus
+    })
   },
 
   methods: {
-    ...mapActions([
-      'logout'
-    ])
+    ...mapActions('login', {
+      logout: 'logout'
+    })
   },
 
   created: function(){
-    this.$store.dispatch('loginCheck')
+    this.$store.dispatch('login/loginCheck')
   }
 }
 </script>

@@ -31,19 +31,18 @@ import { mapActions, mapState } from 'vuex'
 export default {
   computed: {
     ...mapState({
-      email: state => state.auth.email,
-      password: state => state.auth.password
+      email: state => state.login.auth.email,
+      password: state => state.login.auth.password
     })
   },
+
   methods: {
-    ...mapActions([
-      'setEmail',
-      'setPassword',
-      'login'
-    ])
+    ...mapActions('login', {
+      setEmail: 'setEmail',
+      setPassword: 'setPassword',
+      login: 'login'
+    })
   }
-
-
 }
 
 

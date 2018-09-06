@@ -1,8 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from '@/assets/axios';
+import axios from 'axios';
+import router from './router.js'
 
 Vue.use(Vuex)
+
+axios.interceptors.request.use(
+  config => {
+    config.headers['Authorization'] = `Bearer ${localStorage.getItem('jwt-token')}`
+    return config
+  }
+)
+axios.defaults.baseURL = 'http://0.0.0.0:3000'
 
 export default new Vuex.Store({
   state: {
@@ -10,8 +19,11 @@ export default new Vuex.Store({
       email: "",
       password: ""
     },
-    users: []
+    users: [],
+
+    loginStatus: false
   },
+
   mutations: {
     setEmail: (state, email) => {
       state.auth.email = email
@@ -23,6 +35,10 @@ export default new Vuex.Store({
 
     setUsers: (state, users) => {
       state.users = users
+    },
+
+    setStatus: (state, check) => {
+      state.loginStatus = check
     }
   },
   actions: {
@@ -34,30 +50,57 @@ export default new Vuex.Store({
       commit('setPassword', password)
     },
 
-    login: ({ state }) => {
-      axios.axios.post('api/v1/login',{auth:state.auth})
+    getUser: ({ commit }) => {
+      axios.get('/api/v1/admin/users')
         .then((res) => {
           const status = res.status
-          switch(status) {
-            case 201:
-              localStorage.setItem('jwt-token',res.data.jwt)
-              break;
-          }
-        })
-    },
-
-    getUser: ({ commit, state }) => {
-      axios.axios.get('/api/v1/admin/users')
-        .then((res) => {
-          const status = res.status
-          console.log(res)
           switch(status) {
             case 200:
               commit('setUsers', res.data)
               break;
           }
-        })
-    }
+        }).catch( err => {
+          router.push({ path: '/' })
+          console.log('err:', err);
+      });
+    },
 
-  },
+    login: ({ dispatch, commit, state }) => {
+      axios.post('/api/v1/login', { auth: state.auth })
+        .then((res) => {
+          const status = res.status
+          switch(status) {
+            case 201:
+              localStorage.setItem('jwt-token', res.data.jwt)
+              commit('setStatus', true)
+              break;
+          }
+        }).catch( err => {
+        console.log('err:', err);
+      })
+    },
+
+    logout: ({ commit }) => {
+      localStorage.removeItem('jwt-token')
+      commit('setStatus', false)
+    },
+
+    loginCheck: ({ commit }) => {
+      axios.get('/api/v1/ping')
+        .then( res => {
+          const status = res.status
+          switch(status) {
+            case 200:
+              commit('setStatus', true)
+              break;
+            case 401:
+              commit('setStatus', false)
+              break;
+          }
+        }).catch( err => {
+          router.push({ path: '/' })
+          console.log('err:', err);
+      })
+    }
+  }
 })

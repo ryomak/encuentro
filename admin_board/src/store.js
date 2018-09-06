@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from '@/assets/axios';
+import axios from 'axios';
+import { router } from './main.js'
 
 Vue.use(Vuex)
 
@@ -57,30 +58,31 @@ export default new Vuex.Store({
         })
     },
 
-    login: ({ state }) => {
-      axios.axios.post('http://0.0.0.0:3000/api/v1/login',{auth:state.auth})
+    login: ({ dispatch, commit, state }) => {
+      axios.post('http://0.0.0.0:3000/api/v1/login', { auth: state.auth })
         .then((res) => {
           const status = res.status
           switch(status) {
             case 201:
-              localStorage.setItem('jwt-token',res.data.jwt)
+              localStorage.setItem('jwt-token', res.data.jwt)
+              commit('setStatus', true)
               break;
           }
         })
     },
 
-    logout: () => {
+    logout: ({ commit }) => {
       localStorage.removeItem('jwt-token')
+      commit('setStatus', false)
     },
 
     loginCheck: ({ commit }) => {
       axios.get('http://0.0.0.0:3000/api/v1/ping')
         .then((res) => {
           const status = res.status
-          console.log(res)
           switch(status) {
             case 200:
-              commit('setUsers', true)
+              commit('setStatus', true)
               break;
             case 401:
               commit('setStatus', false)

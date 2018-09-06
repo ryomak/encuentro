@@ -15,7 +15,8 @@ import { mapActions, mapState } from 'vuex'
 export default {
   computed: {
     ...mapState([
-      'users'
+      'users',
+      'loginStatus'
     ])
   },
   methods: {
@@ -23,21 +24,20 @@ export default {
       'getUser'
     ])
   },
+
   created: function() {
-    this.$store.dispatch('getUser')
-  }
-  /*
-  data(){
-    return{
-      users:[],
+    if(this.loginStatus){
+      this.$store.dispatch('getUser')
     }
   },
-  created:function(){
-    this.$axios('/api/v1/admin/users').then(res=>{
-      console.log(res)
-    })
-  }
-  */
+  
+  watch: {
+    // この関数は question が変わるごとに実行されます。
+    loginStatus: function () {
+      this.$store.dispatch('getUser')
+    }
+  },
+
 }
 
 

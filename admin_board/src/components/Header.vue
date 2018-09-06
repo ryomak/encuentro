@@ -3,8 +3,8 @@
     <b-navbar type="dark" variant="info">
       <b-navbar-brand href="#">管理画面</b-navbar-brand>
         <b-navbar-nav right>
-          <router-link v-if="loginStatus" to="/" @click="logout" id="logout">
-            LogOut
+          <router-link v-if="loginStatus" to="/" @click.native="logout" id="logout">
+            logout
           </router-link>
         </b-navbar-nav>
     </b-navbar>

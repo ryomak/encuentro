@@ -26,9 +26,5 @@ export default {
       logout: 'logout'
     })
   },
-
-  created: function(){
-    this.$store.dispatch('login/loginCheck')
-  }
 }
 </script>

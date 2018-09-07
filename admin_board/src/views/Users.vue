@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul v-for="user in users" v-bind:key="user.id">
+    <ul v-for="user in users" :key="user.id">
       <li>名前: {{ user.name }}</li>
       <li>性別: {{ user.sex }}</li>
       <li>メールアドレス: {{ user.email }}</li>
@@ -19,13 +19,13 @@ export default {
       loginStatus: state => state.login.loginStatus
     })
   },
+  
 
-  created: function() {
+  mounted: function() {
     if(this.loginStatus){
       this.$store.dispatch('users/getUser')
     }
   },
-
   watch: {
     loginStatus: function () {
       this.$store.dispatch('users/getUser')

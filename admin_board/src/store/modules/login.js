@@ -1,5 +1,5 @@
-import axios from 'axios'
 import router from '../../router.js'
+import axios from '@/assets/axios'
 
 export default {
   namespaced: true,
@@ -21,18 +21,23 @@ export default {
     },
 
     login: ({ commit, state }) => {
-      axios.post('/api/v1/login', { auth: state.auth })
+      axios.axios.post('/api/v1/login', { auth: state.auth })
         .then((res) => {
           const status = res.status
-          switch(status) {
+          switch(status){
             case 201:
               localStorage.setItem('jwt-token', res.data.jwt)
               commit('setStatus', true)
               break;
           }
-        }).catch( err => {
-        console.log('err:', err);
-      })
+      }).catch(error=>{
+          const status = error.response.status
+          switch(status){
+            case 404:
+              router.push("/");
+              break;
+          }
+      });
     },
 
     logout: ({ commit }) => {
@@ -41,7 +46,7 @@ export default {
     },
 
     loginCheck: ({ commit }) => {
-      axios.get('/api/v1/ping')
+      axios.axios.get('/api/v1/ping')
         .then( res => {
           const status = res.status
           switch(status) {
@@ -49,11 +54,7 @@ export default {
               commit('setStatus', true)
               break;
           }
-        }).catch( err => {
-          commit('setStatus', false)
-          router.push({ path: '/' })
-          console.log('err:', err);
-      })
+        })
     }
   },
 

@@ -10,9 +10,8 @@ Rails.application.routes.draw do
       end
       namespace :admin do
         resources :users, only: [:index] do
-          resources :plans, only: [:show, :update, :destroy]
+          resources :plans, only: [:index, :update, :destroy]
         end
-        resources :plans, only: [:index]
       end
     end
   end

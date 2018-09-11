@@ -1,14 +1,9 @@
 class Api::V1::Admin::PlansController < ApplicationController
   before_action :authenticate_user
   before_action :admin_user?
-  before_action :set_plan, only: %i[show update destroy]
+  before_action :set_plan, only: %i[index update destroy]
 
   def index
-    plans = Plan.all
-    render json: plans
-  end
-
-  def show
     render json: @plan
   end
 

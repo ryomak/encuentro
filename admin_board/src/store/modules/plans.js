@@ -1,10 +1,10 @@
-import router from '../../router.js'
 import axios from '@/assets/axios'
 
 export default {
   namespaced: true,
   state: {
-    plans: []
+    plans: [],
+    user_plans: []
   },
 
   actions: {
@@ -18,12 +18,26 @@ export default {
               break;
           }
       });
+    },
+    getUserPlans: ({ commit }, id) => {
+      axios.axios.get(`/api/v1/admin/users/${id}/user_plans`)
+        .then(res => {
+          const status = res.status
+          switch(status) {
+            case 200:
+              commit('setUserPlans', res.data)
+              break;
+          }
+      });
     }
   },
 
   mutations: {
     setPlans: (state, plans) => {
       state.plans = plans
+    },
+    setUserPlans: (state, plan) => {
+      state.user_plans = plan
     }
   }
 }

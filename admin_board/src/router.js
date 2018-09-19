@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from './views/Login.vue'
 import Users from './views/Users.vue'
 import Plans from './views/Plans.vue'
-import PlanDetail from './views/PlanDetail.vue'
+import UserPlans from './views/UserPlans.vue'
 
 
 Vue.use(Router)
@@ -27,8 +27,8 @@ export default new Router({
     },
     {
       path: '/users/:id/plans',
-      name: 'plans_detail',
-      component: PlanDetail
+      name: 'user_plans',
+      component: UserPlans
     }
   ]
 })

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <nuxt/>
   </div>
 </template>
@@ -14,6 +14,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  background-color: #151A37;
 }
 
 *, *:before, *:after {
@@ -35,19 +36,18 @@ html {
   background-color: #3b8070;
 }
 
-.button--grey {
-  display: inline-block;
+.button--white {
+  display: block;
   border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
+  border: 1px solid white;
+  color: white;
   text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+  padding: 10px 20px;
+  margin: 10vw 20vw;
 }
 
-.button--grey:hover {
+.button--white:hover {
   color: #fff;
-  background-color: #35495e;
+  background-color: white;
 }
 </style>
-

@@ -1,19 +1,20 @@
 <template>
   <div>
-    <ul v-for="user in users" :key="user.id">
-      <li><router-link :to="{ name: 'user_plans', params: { id: user.id }}">名前: {{ user.name }}</router-link></li>
-      <li>性別: {{ user.sex }}</li>
-      <li>メールアドレス: {{ user.email }}</li>
-      <li>誕生日: {{ user.birtyday }}</li>
-      <li>大学: {{ user.university }}</li>
-    </ul>
+    <div v-for="user in users" :key="user.id">
+      <UserBox :user="user" />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import UserBox from '../components/UserBox.vue'
 
 export default {
+  components: {
+    UserBox
+  },
+
   computed: {
     ...mapState({
       users: state => state.users.users,

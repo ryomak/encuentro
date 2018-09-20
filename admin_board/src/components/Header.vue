@@ -1,11 +1,7 @@
 <template>
-  <div>
+  <div id="header">
     <b-navbar type="dark" variant="info">
       <b-navbar-brand href="#">管理画面</b-navbar-brand>
-      <b-navbar-nav v-if="loginStatus">
-        <router-link :to="{ name: 'users' }">Users</router-link>
-        <router-link :to="{ name: 'plans' }">Plans</router-link>
-      </b-navbar-nav>
         <b-navbar-nav right>
           <router-link v-if="loginStatus" to="/" @click.native="logout" id="logout">
             logout
@@ -35,3 +31,12 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+#header {
+  a {
+    text-decoration: none;
+    color: #fffdf6;
+  }
+}
+</style>

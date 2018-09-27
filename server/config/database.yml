@@ -13,8 +13,8 @@ development:
   encoding: utf8
   database: encuentro
   pool: 5
-  username: app
-  password: password
+  username: root
+  password: 
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and

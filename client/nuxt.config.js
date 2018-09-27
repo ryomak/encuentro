@@ -1,4 +1,15 @@
 module.exports = {
+
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    // Or if you have custom bootstrap CSS...
+    ['bootstrap-vue/nuxt'],
+  ],
+  plugins: [
+    '~/plugins/axios'
+  ],
+
   /*
   ** Headers of the page
   */
@@ -34,6 +45,11 @@ module.exports = {
         })
       }
     }
+  },
+  axios:{
+    proxy:true,
+  },
+  proxy:{
+    '/api': process.env.USE_LOCAL_SERVER ? 'http://localhost:3000' : 'http://aaa.com',
   }
 }
-

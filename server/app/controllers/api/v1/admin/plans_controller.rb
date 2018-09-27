@@ -4,8 +4,8 @@ class Api::V1::Admin::PlansController < ApplicationController
   before_action :set_plan, only: %i[show update destroy]
 
   def index
-    plans = Plan.all
-    render json: plans
+    @plan = Plan.all
+    render json: @plan
   end
 
   def show

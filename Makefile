@@ -6,6 +6,12 @@ SERVER_ADDR = app.juksl.com
 
 reset-db:
 	sh ./script/reset_db.sh 
+
+develop-deps:
+	cd client && make deps
+
   
 develop-push:
+	#
+	#develop-client deploy
 	git subtree push --prefix=client heroku master

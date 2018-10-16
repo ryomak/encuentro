@@ -9,7 +9,6 @@ module.exports = {
   plugins: [
     '~/plugins/axios'
   ],
-
   /*
   ** Headers of the page
   */
